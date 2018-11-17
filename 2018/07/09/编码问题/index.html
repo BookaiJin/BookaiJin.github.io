@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>编码方式梳理 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="常见的编码方式有ASCII、Unicode、UTF-8、UTF-16和UTF-32 编码的意义即是将生活中使用的字符通过二进制形式保存到计算机中。">
+<meta name="keywords" content="基础积累,编码方式,ASCII,Unicode,UTF-8">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编码方式梳理">
+<meta property="og:url" content="http://yoursite.com/2018/07/09/编码问题/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="常见的编码方式有ASCII、Unicode、UTF-8、UTF-16和UTF-32 编码的意义即是将生活中使用的字符通过二进制形式保存到计算机中。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-15T15:58:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编码方式梳理">
+<meta name="twitter:description" content="常见的编码方式有ASCII、Unicode、UTF-8、UTF-16和UTF-32 编码的意义即是将生活中使用的字符通过二进制形式保存到计算机中。">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-编码问题" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/09/编码问题/" class="article-date">
+  <time datetime="2018-07-09T03:46:52.000Z" itemprop="datePublished">2018-07-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      编码方式梳理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>常见的编码方式有ASCII、Unicode、UTF-8、UTF-16和UTF-32</p>
+<p>编码的意义即是将生活中使用的字符通过二进制形式保存到计算机中。</p>
+<a id="more"></a>
+<p>在计算机产生初期，只设计了控制字符、阿拉伯数字和英文字母等，使用ASCII码即可完成保存操作，ASCII码为一个字节，第一位为0，可以保存128个字符。</p>
+<p>后来随着计算机发展，世界各地产生了大量的编码，ASCII显然无法全部保存，所以产生了Unicode字符集，其中保存了大量的字符，使用频率高的字符用少字节保存，反之用多字节保存。</p>
+<p>使用Unicode可以表示大量字符，但是在文本中占用空间会因ASCII字符使用过多造成浪费，所以又采用了变长编码方式。</p>
+<p>UTF-x (x-bit Unicode Transformation Format) x位Unicode转换格式。其中：</p>
+<p>UTF-8中包含了ASCII字符集，当表示多字节字符时，使用几个字节即在第一个字节高位使用几个1，其余字节高位使用10。如：</p>
+<p>0xxxxxxx 表示使用一个字节</p>
+<p>110xxxxx 10xxxxxx 表示使用两个字节</p>
+<p>1110xxxx 10xxxxxx 10xxxxxx 表示使用三个字节</p>
+<p>以此类推，由此可见UTF-8一共可以使用八个字节表示。</p>
+<p>UTF-16 则可以使用两个或四个字节表示字符，两个字节表示的Unicode字符使用两个字节，其余即用四个字节保存。</p>
+<p>UTF-32 使用了四个字节固定长度编码，可以包含所有Unicode字符。</p>
+<p>鉴于只有UTF-8包含了单字节编码，所以它兼容ASCII编码，所以可以使用UTF-8表示ASCII字符，其余两种则不可以。</p>
+<p>在文件传输过程中会存在格式转换，如网页代码中使用 <code>&lt;meta charset=&quot;UTF-8&quot;/&gt;</code> 表示该网页使用UTF-8编码，是服务器把生成的Unicode内容转换为UTF-8后传输至浏览器的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/09/编码问题/" data-id="cjol0txwh0009vk1urad39gu4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ASCII/">ASCII</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UTF-8/">UTF-8</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unicode/">Unicode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基础积累/">基础积累</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编码方式/">编码方式</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/07/10/Tomcat中运行Servlet基本原理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Servlet和Tomcat容器
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ASCII/">ASCII</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Externalizable/">Externalizable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Filter/">Filter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Serializable/">Serializable</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Servlet/">Servlet</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/">Tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UTF-8/">UTF-8</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unicode/">Unicode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sendRedirect/">sendRedirect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础积累/">基础积累</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/序列化/">序列化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/清除缓存/">清除缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编码方式/">编码方式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/远程仓库/">远程仓库</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ASCII/" style="font-size: 10px;">ASCII</a> <a href="/tags/Externalizable/" style="font-size: 10px;">Externalizable</a> <a href="/tags/Filter/" style="font-size: 10px;">Filter</a> <a href="/tags/Serializable/" style="font-size: 10px;">Serializable</a> <a href="/tags/Servlet/" style="font-size: 10px;">Servlet</a> <a href="/tags/Tomcat/" style="font-size: 20px;">Tomcat</a> <a href="/tags/UTF-8/" style="font-size: 10px;">UTF-8</a> <a href="/tags/Unicode/" style="font-size: 10px;">Unicode</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/sendRedirect/" style="font-size: 10px;">sendRedirect</a> <a href="/tags/基础积累/" style="font-size: 10px;">基础积累</a> <a href="/tags/序列化/" style="font-size: 10px;">序列化</a> <a href="/tags/清除缓存/" style="font-size: 10px;">清除缓存</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/编码方式/" style="font-size: 10px;">编码方式</a> <a href="/tags/远程仓库/" style="font-size: 10px;">远程仓库</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/11/17/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/10/代码提交冲突/">代码提交冲突</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/09/Java序列化之serializable/">Java序列化之serializable</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/20/过滤器Filter/">过滤器Filter</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/16/HttpServletResponse类中sendRedirect访问路径/">HttpServletResponse类中sendRedirect访问路径</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
