@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="git,远程仓库,">
+  <meta name="keywords" content="正则表达式,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="一次 pr 引发的思考 本地开发环境idea、远程个人仓库、开发主仓库">
-<meta name="keywords" content="git,远程仓库">
+<meta name="description" content="正则表达式  学习、使用过程中的一些问题，就不写哪些虚了吧唧的概念了。 以后问题多了，需要多写几篇，具体分一下类。">
+<meta name="keywords" content="正则表达式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="代码提交冲突">
-<meta property="og:url" content="http://yoursite.com/2018/08/10/代码提交冲突/index.html">
+<meta property="og:title" content="Java正则表达式踩坑记录">
+<meta property="og:url" content="http://yoursite.com/2018/12/10/Java正则表达式踩坑记录/index.html">
 <meta property="og:site_name" content="Bookai&#39;s blog">
-<meta property="og:description" content="一次 pr 引发的思考 本地开发环境idea、远程个人仓库、开发主仓库">
+<meta property="og:description" content="正则表达式  学习、使用过程中的一些问题，就不写哪些虚了吧唧的概念了。 以后问题多了，需要多写几篇，具体分一下类。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-10T08:21:42.000Z">
+<meta property="og:updated_time" content="2018-12-10T13:29:53.529Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="代码提交冲突">
-<meta name="twitter:description" content="一次 pr 引发的思考 本地开发环境idea、远程个人仓库、开发主仓库">
+<meta name="twitter:title" content="Java正则表达式踩坑记录">
+<meta name="twitter:description" content="正则表达式  学习、使用过程中的一些问题，就不写哪些虚了吧唧的概念了。 以后问题多了，需要多写几篇，具体分一下类。">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/10/代码提交冲突/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/10/Java正则表达式踩坑记录/">
 
 
 
 
 
-  <title>代码提交冲突 | Bookai's blog</title>
+  <title>Java正则表达式踩坑记录 | Bookai's blog</title>
   
 
 
@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/10/代码提交冲突/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/10/Java正则表达式踩坑记录/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Bokai">
@@ -260,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">代码提交冲突</h1>
+          <h1 class="post-title" itemprop="name headline">Java正则表达式踩坑记录</h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-10T15:29:49+08:00">
-                2018-08-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-10T19:48:30+08:00">
+                2018-12-10
               </time>
             
 
@@ -310,15 +310,63 @@
       
 
       
-        <p>一次 <strong>pr</strong> 引发的思考</p>
-<p>本地开发环境idea、远程个人仓库、开发主仓库</p>
+        <p><strong>正则表达式</strong> </p>
+<p>学习、使用过程中的一些问题，就不写哪些虚了吧唧的概念了。</p>
+<p>以后问题多了，需要多写几篇，具体分一下类。</p>
 <a id="more"></a>
-<p>首先！！！</p>
-<p><strong>以后提交代码的做法</strong> ：首先在IDEA里修改完代码后，进行commit将修改保存，然后update将远程代码拉下来， <strong>如果有冲突在此时解决</strong> ，解决完冲突后push，然后pr。</p>
-<p>事故现场：</p>
-<p>代码修改后push完毕，提出pr，此时主仓库检测到冲突。 <strong>事故原因</strong> ：pr前有同事进行了merge，主仓库内容与个人仓库内容存在冲突。</p>
-<p>解决：</p>
-<p>干掉个人仓库，重新fork，此时个人仓库代码是最新的，本地内容已经commit，与个人仓库不同，push时文件为蓝色，检查修改，push然后pr。</p>
+<p>先来一段代码，以后写正则表达式的开端：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testRegexUtils</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    String regex = <span class="string">"(ISODate\\()\"(.*?)\"(\\))"</span>;</span><br><span class="line">    String text = <span class="string">"&#123;name:\"Wetpaint\",created_at:&#123;$lt:ISODate(\"$&#123;date&#125;\"),$gt:ISODate(\"2000-01-01\")&#125;,permalink:\"abc2\"&#125;"</span>;</span><br><span class="line">    String replacement = <span class="string">"$1'$2'$3"</span>;</span><br><span class="line">    Pattern pattern = Pattern.compile(regex);</span><br><span class="line">    Matcher m = pattern.matcher(text);</span><br><span class="line">    System.out.println(m.find());</span><br><span class="line">    String text1 = text.replaceAll(regex,<span class="string">"$1'$2'$3"</span>);</span><br><span class="line">    System.out.println(text1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>先记录一个问题：</p>
+<p>String#replacement(String regex, String replacement)这个方法，不会修改使用调用此方法的对象本身，而是<strong>返回一个替换后的字符串</strong>，使用debug中的calculator计算可以得到替换后的值，可是调用的text值没有改变。</p>
+<p>思路呢，就是：</p>
+<p><strong>text</strong>——字符串，你手头待处理的文本</p>
+<p><strong>regex</strong>——正则表达式，你想要筛选的符合这个格式的内容，所以说正则表达式是一种格式</p>
+<p><strong>replacement</strong>——替换的目标字符串</p>
+<p>所以，总的目的和流程就是：<strong>将text中符合regex的部分替换为replacement</strong>，至于匹配，就text.matchs(regex)</p>
+<p>分组 ((A)(B)(C))   $1对应第一个分组A，依次类推</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">获取</th>
+<th style="text-align:center">值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">m.group(0)</td>
+<td style="text-align:center">((A)(B)(C))</td>
+</tr>
+<tr>
+<td style="text-align:center">m.group(1)</td>
+<td style="text-align:center">(A)</td>
+</tr>
+<tr>
+<td style="text-align:center">m.group(2)</td>
+<td style="text-align:center">(B)</td>
+</tr>
+<tr>
+<td style="text-align:center">m.group(3)</td>
+<td style="text-align:center">(C)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>boolean</code></td>
+<td style="text-align:center"><code>find()</code>            尝试查找与该模式匹配的输入序列的下一个子序列。</td>
+</tr>
+</tbody>
+</table>
+<p>所以如果Mathcer匹配到了多个结果，可以使用循环取组里的值，相当于迭代器，有一个指针不停向后移动，所以<code>text = &quot;{name:\&quot;Wetpaint\&quot;,created_at:{$lt:ISODate(\&quot;${date}\&quot;),$gt:ISODate(\&quot;2000-01-01\&quot;)},permalink:\&quot;abc2\&quot;}&quot;</code>中m.find() 重复计算只能得到两次true</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Matcher m = pattern.matcher(text);</span><br><span class="line">while(m.find())&#123;</span><br><span class="line">    String date = m.group(2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用说明，匹配字符 使用时查阅、配合debug就可以写出正确的正则表达式了，这儿就不BB了。</p>
 
       
     </div>
@@ -336,9 +384,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/git/" rel="tag"># git</a>
-          
-            <a href="/tags/远程仓库/" rel="tag"># 远程仓库</a>
+            <a href="/tags/正则表达式/" rel="tag"># 正则表达式</a>
           
         </div>
       
@@ -351,8 +397,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/09/Java序列化之serializable/" rel="next" title="Java序列化之serializable">
-                <i class="fa fa-chevron-left"></i> Java序列化之serializable
+              <a href="/2018/08/10/代码提交冲突/" rel="next" title="代码提交冲突">
+                <i class="fa fa-chevron-left"></i> 代码提交冲突
               </a>
             
           </div>
@@ -360,10 +406,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/10/Java正则表达式踩坑记录/" rel="prev" title="Java正则表达式踩坑记录">
-                Java正则表达式踩坑记录 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
